@@ -1,5 +1,6 @@
 'use strict';
 
+
 class Tamagochy {
     // points from 0 to 10
     constructor (name){
@@ -9,11 +10,13 @@ class Tamagochy {
         this.tired = 0;
         this.happiness = 10;
         this.health = 10;
-        this.run_away = false;
+        this.run = false;
         this._say("I'm alive!");
     }
 
-
+    /**
+     * Feed method will increase food pet param and simulate pet life in the end
+     */
     feed(){
         if(this.food > 10) {
             this._say("I don't want eat!")
@@ -36,7 +39,8 @@ class Tamagochy {
     }
 
     sleep(){
-
+        // additional logic to emulate pet life
+        // if it's hungary or need some water?
         if (this.food <= 3 && this.dehydration >= 7) {
             this._say("I don't want sleep!");
             if (this.food <= 3) {
@@ -46,6 +50,7 @@ class Tamagochy {
                 this._say("I want drink!");
             }
         } else {
+            // we can put him sleep and decrement food and water
             this.food -= 3;
             this.dehydration += 3;
             this.tired = 0;
@@ -55,6 +60,7 @@ class Tamagochy {
 
         this._simulate();
     }
+
 
     play() {
         if (this.happiness <= 3 ||
@@ -71,6 +77,11 @@ class Tamagochy {
         this._simulate();
     }
 
+    /**
+     * Private method which is used in every public method.
+     * It's used to create some kind of life simulation
+     * @private
+     */
     _simulate(){
         this.food -= 1;
         this.dehydration += 1;
@@ -96,24 +107,16 @@ class Tamagochy {
 
         if (this.food <= 0 && this.dehydration >= 10) {
             this._say("You are bad owner! Good bye!");
-            this.run_away = true;
+            this.run = true;
         }
 
         if (this.playing <=5 && this.happiness >=4 && this.health >=7){
             this._say("I want play!");
         }
-
-        //if () {
-        //    this.run_away = true
-        //}
     }
 
     _say(msg){
         console.log("%c"+ this.name + " says: " + msg, 'background: #222; color: #bada55');
+        alert(this.name + " says: " + msg);
     }
 }
-
-
-let petName = prompt('Please, enter the name of your pet...');
-let cat = new Tamagochy(petName);
-

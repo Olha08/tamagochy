@@ -5,8 +5,48 @@
     <title>Tamagochy</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="tamagochy.js"></script>
+
+    <script>
+        var pet;
+
+        function createPet(){
+            let petName = prompt('Please, enter the name of your pet...');
+            pet = new Tamagochy(petName);
+
+            document.getElementById('create_pet').setAttribute('disabled', 'disabled');
+            document.getElementById('feed').removeAttribute('disabled');
+            document.getElementById('drink').removeAttribute('disabled');
+            document.getElementById('sleep').removeAttribute('disabled');
+            document.getElementById('play').removeAttribute('disabled');
+        }
+
+        function drink(){
+            pet.drink();
+        }
+
+        function feed(){
+            pet.feed();
+        }
+
+        function sleep(){
+            pet.sleep();
+        }
+
+        function play(){
+            pet.play();
+        }
+
+    </script>
+
 </head>
 <body>
 <h1>Tamagochy task</h1>
+<ul>
+    <li><button id="create_pet" onclick="createPet()" >Create a pet</button> </li>
+    <li><button id="feed" disabled onclick="feed()" >Feed</button></li>
+    <li><button id="drink" disabled onclick="drink()" >Drink</button></li>
+    <li><button id="sleep" disabled onclick="sleep()" >Sleep</button></li>
+    <li><button id="play" disabled onclick="play()" >Play</button></li>
+</ul>
 </body>
 </html>
