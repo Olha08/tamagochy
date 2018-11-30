@@ -2,6 +2,7 @@
 
 
 class Tamagochy {
+
     // points from 0 to 10
     constructor (name){
         this.name = name;
@@ -10,7 +11,7 @@ class Tamagochy {
         this.tired = 0;
         this.happiness = 10;
         this.health = 10;
-        this.run = false;
+        this.available = true;
         this._say("I'm alive!");
     }
 
@@ -19,7 +20,7 @@ class Tamagochy {
      */
     feed(){
         if(this.food > 10) {
-            this._say("I don't want eat!")
+            this._say("I don't want eat!");
         } else {
             this._say("I'm eating ...");
             this.food = 10;
@@ -61,7 +62,6 @@ class Tamagochy {
         this._simulate();
     }
 
-
     play() {
         if (this.happiness <= 3 ||
             this.health <= 3 ||
@@ -82,7 +82,7 @@ class Tamagochy {
      * It's used to create some kind of life simulation
      * @private
      */
-    _simulate(){
+    var _simulate = function(){
         this.food -= 1;
         this.dehydration += 1;
         this.tired += 1;
@@ -107,15 +107,24 @@ class Tamagochy {
 
         if (this.food <= 0 && this.dehydration >= 10) {
             this._say("You are bad owner! Good bye!");
-            this.run = true;
+            this.available = false;
         }
 
         if (this.playing <=5 && this.happiness >=4 && this.health >=7){
             this._say("I want play!");
         }
+
+        if (this.food <=0 || this.dehydration >=10 || this.tired >=10){
+            this._say("I died!");
+            this.available = false;
+        }
     }
 
-    _say(msg){
+    isAvailable(){
+        return this.available;
+    }
+
+    var _say = function(msg){
         console.log("%c"+ this.name + " says: " + msg, 'background: #222; color: #bada55');
         alert(this.name + " says: " + msg);
     }

@@ -10,7 +10,12 @@
         var pet;
 
         function createPet(){
-            let petName = prompt('Please, enter the name of your pet...');
+            let petName = "";
+
+            while(petName==""){
+                petName = prompt('Please, enter the name of your pet...');
+            }
+
             pet = new Tamagochy(petName);
 
             document.getElementById('create_pet').setAttribute('disabled', 'disabled');
@@ -22,18 +27,29 @@
 
         function drink(){
             pet.drink();
+            checkStatus();
         }
 
         function feed(){
             pet.feed();
+            checkStatus();
         }
 
         function sleep(){
             pet.sleep();
+            checkStatus();
         }
 
         function play(){
             pet.play();
+            checkStatus();
+        }
+
+        function checkStatus(){
+            if (!pet.isAvailable()) {
+                document.getElementsByTagName('ul')[0].style.opacity = 0.2;
+                document.getElementsByTagName('ul')[0].style.pointerEvents = 'none';
+            }
         }
 
     </script>
